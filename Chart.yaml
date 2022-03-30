@@ -1,0 +1,5 @@
+apiVersion: v2
+appVersion: 2.3.2
+description: Argo CD is a continuous delivery tool for Kubernetes based on GitOps.
+name: argocd-app
+version: 0.1.0

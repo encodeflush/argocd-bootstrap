@@ -1,0 +1,14 @@
+applications:
+  enabled: false
+
+private:
+  enabled: false
+
+argo-cd:
+  fullnameOverride: ""
+  dex:
+    enabled: false
+  redis:
+    enabled: false
+  redis-ha:
+    enabled: false

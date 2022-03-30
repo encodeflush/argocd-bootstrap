@@ -1,0 +1,18 @@
+{{- if .Values.private.enabled }}
+{{- if index .Values "private" "repo" }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-secret
+  labels:
+    app.kubernetes.io/name: repo--secret
+    helm.sh/chart: {{ include "argo-cd.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    app.kubernetes.io/part-of: {{ .Chart.Name }}
+type: Opaque
+data:
+  username: {{ required ".Values.private.repo.username is required!" (index .Values.private "repo" "username") | b64enc }}
+  password: {{ required ".Values.private.repo.password is required!" (index .Values.private "repo" "password") | b64enc }}
+{{- end }}
+{{- end }}

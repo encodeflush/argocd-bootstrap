@@ -1,0 +1,20 @@
+{{- if .Values.applications.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: infra-apps
+  annotations:
+    "helm.sh/resource-policy": keep
+spec:
+  destination:
+    namespace: {{ .Release.Namespace }}
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    chart: argocd-apps
+    repoURL: {{ .Values.applications.repositoryUrl }}
+    targetRevision: {{ .Values.applications.version }}
+    helm:
+      values: |-
+        targetNamespace: {{ .Values.applications.targetNamespace }}
+{{- end }}
